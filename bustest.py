@@ -1,11 +1,10 @@
-import json
 import os
-
 import requests
 import xmltodict
+import json
 from dotenv import load_dotenv
 
-# .env 파일 활성화
+# .env 파일 로드
 load_dotenv()
 SERVICE_KEY = os.getenv('SERVICE_KEY')
 
@@ -24,14 +23,14 @@ def fetch_and_save_data(url, filename):
         response.raise_for_status()
         xml_data = response.content.decode('utf-8') # 한글이 이상하게 나와서 디코딩이 필요함
         json_data = json.dumps(xmltodict.parse(xml_data), indent=4, ensure_ascii=False)
-
+        
         with open(filename, 'w', encoding='utf-8') as file:
             file.write(json_data)
 
     except requests.exceptions.RequestException as e:
-        print(f"Error fetching data from {url}: {e}")
+        print(f"{url}에서 데이터 가져올 수 없습니다.: {e}")
     except Exception as e:
-        print(f"Error processing XML data: {e}")
+        print(f"XML 데이터 처리 중 오류가 발생했습니다.: {e}")
 
 # 데이터 저장
 def data_save():
