@@ -10,7 +10,7 @@ SERVICE_KEY = os.getenv('SERVICE_KEY')
 
 # 창원버스 정보제공 API는 데이터 포맷이 XML 이므로 JSON 변환 과정 추가
 
-# URL 리스트 정의
+# URL 리스트 정의 BUS, STATION DATA LOAD [1-1], [1-3] 데이터 로드
 API_URLS = {
     'busdata': f'http://openapi.changwon.go.kr/rest/bis/Bus/?serviceKey={SERVICE_KEY}',
     'stationdata': f'http://openapi.changwon.go.kr/rest/bis/Station/?serviceKey={SERVICE_KEY}'
