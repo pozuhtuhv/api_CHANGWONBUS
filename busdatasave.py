@@ -63,7 +63,7 @@ newdata_load()
 # ROUTE_ID = input()
 
 # 현재 3006번의 버스 운행 목록
-url = 'http://openapi.changwon.go.kr/rest/bis/BusPosition/?serviceKey={SERVICE_KEY}&route=379030060'
+url = f'http://openapi.changwon.go.kr/rest/bis/BusPosition/?serviceKey={SERVICE_KEY}&route=379030060'
 response = requests.get(url)
 xml_data = response.content.decode('utf-8') # 한글 디코딩이 필요함
 json_data = json.dumps(xmltodict.parse(xml_data), indent=4, ensure_ascii=False)
