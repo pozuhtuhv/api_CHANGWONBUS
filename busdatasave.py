@@ -18,6 +18,7 @@ API_URLS = {
 }
 
 # XML 데이터를 가져와 JSON으로 변환 후 파일에 저장
+# 데이터 로드 영역 22 ~ 58
 def fetch_and_save_data(url, filename):
     try:
         response = requests.get(url)
@@ -33,7 +34,6 @@ def fetch_and_save_data(url, filename):
     except Exception as e:
         print(f'XML 데이터 처리 중 오류가 발생했습니다.: {e}')
 
-# 데이터 저장
 def data_save():
     for filename, url in API_URLS.items():
         print('older than 6 hours, reloading...')
@@ -62,12 +62,19 @@ newdata_load()
 
 # ROUTE_ID = input()
 
-# url = 'http://openapi.changwon.go.kr/rest/bis/BusPosition/?serviceKey=q4mVVnThFbLHMkdYVcm2Pw%2BdMQvjZNuHBQ2KEOdz4W9PAwKzsUT76JrtwcFa2ZA3xdr2ObeBYs8jrcGz4I7BvQ%3D%3D&route=379030060'
-# response = requests.get(url)
-# xml_data = response.content.decode('utf-8') # 한글 디코딩이 필요함
-# json_data = json.dumps(xmltodict.parse(xml_data), indent=4, ensure_ascii=False)
+# 현재 3006번의 버스 운행 목록
+url = 'http://openapi.changwon.go.kr/rest/bis/BusPosition/?serviceKey={SERVICE_KEY}&route=379030060'
+response = requests.get(url)
+xml_data = response.content.decode('utf-8') # 한글 디코딩이 필요함
+json_data = json.dumps(xmltodict.parse(xml_data), indent=4, ensure_ascii=False)
 
-# with open('data/[4-1]busposition.json', 'w', encoding='utf-8') as file:
-#     file.write(json_data)
+with open('data/[4-1]busposition.json', 'w', encoding='utf-8') as file:
+    file.write(json_data)
 
-## 379030060
+with open('data/[4-1]busposition.json', 'r', encoding='utf-8') as file:
+    data = json.load(file)
+
+rows = data["ServiceResult"]["MsgBody"]["BusPositionList"]["row"]
+
+for row in rows:
+    print(row)
