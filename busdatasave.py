@@ -58,23 +58,21 @@ def newdata_load():
 
 newdata_load()
 
-# http://openapi.changwon.go.kr/rest/bis/ROUTEPosition/?serviceKey={SERVICE_KEY}&route={ROUTE_ID}
+# # 현재 3006번의 버스 운행 목록
+# url = f'http://openapi.changwon.go.kr/rest/bis/BusPosition/?serviceKey={SERVICE_KEY}&route=379030060'
+# response = requests.get(url)
+# xml_data = response.content.decode('utf-8') # 한글 디코딩이 필요함
+# json_data = json.dumps(xmltodict.parse(xml_data), indent=4, ensure_ascii=False)
 
-# ROUTE_ID = input()
+# json 저장
+# with open('data/[4-1]busposition.json', 'w', encoding='utf-8') as file:
+#     file.write(json_data)
 
-# 현재 3006번의 버스 운행 목록
-url = f'http://openapi.changwon.go.kr/rest/bis/BusPosition/?serviceKey={SERVICE_KEY}&route=379030060'
-response = requests.get(url)
-xml_data = response.content.decode('utf-8') # 한글 디코딩이 필요함
-json_data = json.dumps(xmltodict.parse(xml_data), indent=4, ensure_ascii=False)
+# json 읽기
+# with open('data/[4-1]busposition.json', 'r', encoding='utf-8') as file:
+#     data = json.load(file)
 
-with open('data/[4-1]busposition.json', 'w', encoding='utf-8') as file:
-    file.write(json_data)
+# rows = data["ServiceResult"]["MsgBody"]["BusPositionList"]["row"]
 
-with open('data/[4-1]busposition.json', 'r', encoding='utf-8') as file:
-    data = json.load(file)
-
-rows = data["ServiceResult"]["MsgBody"]["BusPositionList"]["row"]
-
-for row in rows:
-    print(row)
+# for row in rows:
+#     print(row)
