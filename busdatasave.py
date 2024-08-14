@@ -21,7 +21,7 @@ def fetch_and_save_data(url, filename):
     try:
         response = requests.get(url)
         response.raise_for_status()
-        xml_data = response.content.decode('utf-8') # 한글이 이상하게 나와서 디코딩이 필요함
+        xml_data = response.content.decode('utf-8') # 한글 디코딩이 필요함
         json_data = json.dumps(xmltodict.parse(xml_data), indent=4, ensure_ascii=False)
         
         with open(filename, 'w', encoding='utf-8') as file:
