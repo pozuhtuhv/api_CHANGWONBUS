@@ -60,3 +60,5 @@
    - [1-3][stationdata] 데이터를 수집
    - INPUT의 STATION_NM을 통해 목록 나열
    - 나열된 정류소 목록에서 선택 후 STATION_ID 리턴 [2-2]번 STATION_ID 검색 후 도착예정인 버스의 [1-1][busdata] 데이터에서 [ROUTE_ID] 를 [ROUTE_NM] 로 리턴
+
+#### PLAN [3] : Javescript, html 적용 출력
