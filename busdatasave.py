@@ -3,6 +3,7 @@ import requests
 import xmltodict
 import json
 from dotenv import load_dotenv
+import datetime
 
 # .env 파일 로드
 load_dotenv()
@@ -28,18 +29,36 @@ def fetch_and_save_data(url, filename):
             file.write(json_data)
 
     except requests.exceptions.RequestException as e:
-        print(f"{url}에서 데이터 가져올 수 없습니다.: {e}")
+        print(f'{url}에서 데이터 가져올 수 없습니다.: {e}')
     except Exception as e:
-        print(f"XML 데이터 처리 중 오류가 발생했습니다.: {e}")
+        print(f'XML 데이터 처리 중 오류가 발생했습니다.: {e}')
 
 # 데이터 저장
 def data_save():
     for filename, url in API_URLS.items():
-        fetch_and_save_data(url, f"data/{filename}.json")
+        print('older than 6 hours, reloading...')
+        fetch_and_save_data(url, f'data/{filename}.json')
+        print('reload Done')
 
-data_save()
+def newdata_load():
+    # 데이터의 6시간 기준 최신화를 위한 리로드
+    # 6시간 전의 현재 시간
+    six_hours_ago = datetime.datetime.now() - datetime.timedelta(hours=6)
 
-# http://openapi.changwon.go.kr/rest/bis/ROUTEPosition/?serviceKey=q4mVVnThFbLHMkdYVcm2Pw%2BdMQvjZNuHBQ2KEOdz4W9PAwKzsUT76JrtwcFa2ZA3xdr2ObeBYs8jrcGz4I7BvQ%3D%3D&route=379030060
+    # data/ 폴더 내의 모든 파일을 찾습니다.
+    files = [os.path.join('data/', f) for f in os.listdir('data/') if os.path.isfile(os.path.join('data/', f))]
+
+    # 각 파일의 마지막 수정일을 확인합니다.
+    for file in files:
+        modified_time = datetime.datetime.fromtimestamp(os.path.getmtime(file))
+        if modified_time < six_hours_ago:  
+            data_save()
+        else:
+            print('No reload required')
+
+newdata_load()
+
+# http://openapi.changwon.go.kr/rest/bis/ROUTEPosition/?serviceKey={SERVICE_KEY}&route={ROUTE_ID}
 
 # ROUTE_ID = input()
 
