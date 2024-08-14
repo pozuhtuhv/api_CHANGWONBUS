@@ -12,8 +12,8 @@ SERVICE_KEY = os.getenv('SERVICE_KEY')
 
 # URL 리스트 정의 BUS, STATION DATA LOAD [1-1], [1-3] 데이터 로드
 API_URLS = {
-    'busdata': f'http://openapi.changwon.go.kr/rest/bis/Bus/?serviceKey={SERVICE_KEY}',
-    'stationdata': f'http://openapi.changwon.go.kr/rest/bis/Station/?serviceKey={SERVICE_KEY}'
+    '[1-1]busdata': f'http://openapi.changwon.go.kr/rest/bis/Bus/?serviceKey={SERVICE_KEY}',
+    '[1-3]stationdata': f'http://openapi.changwon.go.kr/rest/bis/Station/?serviceKey={SERVICE_KEY}'
 }
 
 # XML 데이터를 가져와 JSON으로 변환 후 파일에 저장
@@ -38,3 +38,17 @@ def data_save():
         fetch_and_save_data(url, f"data/{filename}.json")
 
 data_save()
+
+# http://openapi.changwon.go.kr/rest/bis/ROUTEPosition/?serviceKey=q4mVVnThFbLHMkdYVcm2Pw%2BdMQvjZNuHBQ2KEOdz4W9PAwKzsUT76JrtwcFa2ZA3xdr2ObeBYs8jrcGz4I7BvQ%3D%3D&route=379030060
+
+# ROUTE_ID = input()
+
+# url = 'http://openapi.changwon.go.kr/rest/bis/BusPosition/?serviceKey=q4mVVnThFbLHMkdYVcm2Pw%2BdMQvjZNuHBQ2KEOdz4W9PAwKzsUT76JrtwcFa2ZA3xdr2ObeBYs8jrcGz4I7BvQ%3D%3D&route=379030060'
+# response = requests.get(url)
+# xml_data = response.content.decode('utf-8') # 한글 디코딩이 필요함
+# json_data = json.dumps(xmltodict.parse(xml_data), indent=4, ensure_ascii=False)
+
+# with open('data/[4-1]busposition.json', 'w', encoding='utf-8') as file:
+#     file.write(json_data)
+
+## 379030060

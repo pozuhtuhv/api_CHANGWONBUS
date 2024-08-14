@@ -51,12 +51,12 @@
 
 ### PLAN
 #### PLAN [1] : 실제버스번호를 INPUT -> 현재 버스위치 리턴, 다음 정류소 리턴
-   - [1-1] 데이터를 수집
-   - INPUT의 실제버스번호에서 1-1 받아온 데이터의 [ROUTE_NM]를 [ROUTE_ID]와 매칭하여 [ROUTE_ID] 를 리턴
-   - [4-1] 데이터에서 현재 버스 위치를 리턴
+   - [1-1][busdata] 데이터를 수집
+   - INPUT의 실제버스번호에서 [1-1][busdata] 받아온 데이터의 [ROUTE_NM]를 [ROUTE_ID]와 매칭하여 [ROUTE_ID] 를 리턴
+   - [4-1][busposition] 데이터에서 현재 버스 위치를 리턴
    - [ROUTE_ID]의 현재 버스 위치의 다음 정류장을 리턴
   
 #### PLAN [2] : 정류장검색 -> 상행하행구분 정류소 목록 -> 선택 -> 정류소 도착정보
-   - [1-3] 데이터를 수집
+   - [1-3][stationdata] 데이터를 수집
    - INPUT의 STATION_NM을 통해 목록 나열
-   - 나열된 정류소 목록에서 선택 후 STATION_ID 리턴 [2-2]번 STATION_ID 검색 후 도착예정인 버스의 [1-1] 데이터에서 [ROUTE_ID] 를 [ROUTE_NM] 로 리턴
+   - 나열된 정류소 목록에서 선택 후 STATION_ID 리턴 [2-2]번 STATION_ID 검색 후 도착예정인 버스의 [1-1][busdata] 데이터에서 [ROUTE_ID] 를 [ROUTE_NM] 로 리턴
