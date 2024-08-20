@@ -58,21 +58,23 @@ def newdata_load():
 
 newdata_load()
 
-# # 현재 3006번의 버스 운행 목록
-# url = f'http://openapi.changwon.go.kr/rest/bis/BusPosition/?serviceKey={SERVICE_KEY}&route=379030060'
+# 3006번의 버스 - 379030060
+
+# ROUTE_ID = '379030060'
+# url = f'http://openapi.changwon.go.kr/rest/bis/BusLocation/?serviceKey={SERVICE_KEY}&route={ROUTE_ID}'
 # response = requests.get(url)
 # xml_data = response.content.decode('utf-8') # 한글 디코딩이 필요함
 # json_data = json.dumps(xmltodict.parse(xml_data), indent=4, ensure_ascii=False)
 
-# json 저장
-# with open('data/[4-1]busposition.json', 'w', encoding='utf-8') as file:
+# # json 저장
+# with open('data/[3-1]busstop.json', 'w', encoding='utf-8') as file:
 #     file.write(json_data)
 
-# json 읽기
-# with open('data/[4-1]busposition.json', 'r', encoding='utf-8') as file:
+# # json 읽기
+# with open('data/[3-1]busstop.json', 'r', encoding='utf-8') as file:
 #     data = json.load(file)
 
-# rows = data["ServiceResult"]["MsgBody"]["BusPositionList"]["row"]
+# rows = data["ServiceResult"]["MsgBody"]["BusLocationList"]["row"]
 
 # for row in rows:
 #     print(row)
