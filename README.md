@@ -8,7 +8,7 @@
 ## API DATA INFORMATION
 
 ### 1. BUS, STATION DATA LOAD (busdata.json, stationdata.json)
-- 1. [경상남도 창원시_기반정보조회서비스](https://www.data.go.kr/tcs/dss/selectApiDataDetailView.do?publicDataPk=15000096)
+#### 1. [경상남도 창원시_기반정보조회서비스](https://www.data.go.kr/tcs/dss/selectApiDataDetailView.do?publicDataPk=15000096)
    - [1] 버스노선목록 (http://openapi.changwon.go.kr/rest/bis/Bus/?serviceKey={SERVICE_KEY})
       - ROUTE_ID : 버스 고유번호
       - ROUTE_NM : 버스 실제번호
