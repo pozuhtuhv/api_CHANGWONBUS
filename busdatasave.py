@@ -8,7 +8,6 @@ import datetime
 # .env 파일 로드
 load_dotenv()
 SERVICE_KEY = os.getenv('SERVICE_KEY')
-
 # 창원버스 정보제공 API는 데이터 포맷이 XML 이므로 JSON 변환 과정 추가
 
 # URL 리스트 정의 BUS, STATION DATA LOAD [1-1], [1-3] 데이터 로드
@@ -45,21 +44,39 @@ def newdata_load():
     # 6시간 전의 현재 시간
     six_hours_ago = datetime.datetime.now() - datetime.timedelta(hours=6)
 
-    # data/ 폴더 내의 모든 파일을 찾습니다.
-    files = [os.path.join('data/', f) for f in os.listdir('data/') if os.path.isfile(os.path.join('data/', f))]
+    # [1-1]busdata 파일을 대표로 마지막 시간을 확인
+    modified_time = datetime.datetime.fromtimestamp(os.path.getmtime('data/[1-1]busdata.json'))
+    if modified_time < six_hours_ago:  
+        data_save()
+    else:
+        print('No reload required')
 
-    # 각 파일의 마지막 수정일을 확인합니다.
-    for file in files:
-        modified_time = datetime.datetime.fromtimestamp(os.path.getmtime(file))
-        if modified_time < six_hours_ago:  
-            data_save()
-        else:
-            print('No reload required')
-
+# 실행시 무조건 실행
 newdata_load()
 
-# 3006번의 버스 - 379030060
 
+# 버스정보검색 ([1-3]stationdata.json 연동 필요)
+bus = input('버스번호검색: ')
+# json 데이터 로드
+with open('data/[1-1]busdata.json', 'r', encoding='utf-8') as file:
+    rows = json.load(file)["ServiceResult"]["MsgBody"]["BusList"]["row"]
+
+# 검색 결과 출력
+matching_buses = [row for row in rows if bus in str(row["ROUTE_NM"])]
+
+for bus_info in matching_buses:
+    print(bus_info["ROUTE_NM"])
+
+# 사용자 선택
+selected_bus = input('선택: ')
+
+# 선택한 버스 정보 출력
+for bus_info in matching_buses:
+    if selected_bus == str(bus_info["ROUTE_NM"]):
+        print(bus_info)
+
+##############################
+# 3006번의 버스 - 379030060
 # ROUTE_ID = '379030060'
 # url = f'http://openapi.changwon.go.kr/rest/bis/BusLocation/?serviceKey={SERVICE_KEY}&route={ROUTE_ID}'
 # response = requests.get(url)

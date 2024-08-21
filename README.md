@@ -1,4 +1,4 @@
-# 창원버스 API 문서
+# 창원버스 API 문서 For Python
 
 ## 개요
 - **프로토콜**: REST
