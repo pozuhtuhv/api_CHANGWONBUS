@@ -75,20 +75,21 @@ for bus_info in matching_buses:
     if selected_bus == str(bus_info["ROUTE_NM"]):
         print(bus_info)
 
-##############################
-# 3006번의 버스 - 379030060
+# ##############################
+# # 3006번의 버스 - 379030060
 # ROUTE_ID = '379030060'
-# url = f'http://openapi.changwon.go.kr/rest/bis/BusLocation/?serviceKey={SERVICE_KEY}&route={ROUTE_ID}'
+# STATION_ID = '379005774'
+# url = f'http://openapi.changwon.go.kr/rest/bis/BusArrives/?serviceKey={SERVICE_KEY}&station={STATION_ID}'
 # response = requests.get(url)
 # xml_data = response.content.decode('utf-8') # 한글 디코딩이 필요함
 # json_data = json.dumps(xmltodict.parse(xml_data), indent=4, ensure_ascii=False)
 
 # # json 저장
-# with open('data/[3-1]busstop.json', 'w', encoding='utf-8') as file:
+# with open('data/[2-1]busarrives.json', 'w', encoding='utf-8') as file:
 #     file.write(json_data)
 
 # # json 읽기
-# with open('data/[3-1]busstop.json', 'r', encoding='utf-8') as file:
+# with open('data/[2-1]busstop.json', 'r', encoding='utf-8') as file:
 #     data = json.load(file)
 
 # rows = data["ServiceResult"]["MsgBody"]["BusLocationList"]["row"]

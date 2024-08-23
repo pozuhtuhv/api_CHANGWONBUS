@@ -30,7 +30,7 @@
 
 - **[경상남도 창원시_버스도착정보조회](https://www.data.go.kr/tcs/dss/selectApiDataDetailView.do?publicDataPk=15000386)**
 
-- **정류소버스도착정보**
+- **정류소버스도착정보** - **[2-1]busarrives.json**
   - **엔드포인트**: `http://openapi.changwon.go.kr/rest/bis/BusArrives/?serviceKey={SERVICE_KEY}&station={STATION_ID}`
   - **반환 정보 (필요한것만)**:
     - `ROUTE_ID`: 버스 고유 ID
